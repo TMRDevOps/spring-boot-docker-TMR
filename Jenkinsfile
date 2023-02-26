@@ -22,7 +22,8 @@ node{
           sh 'docker push tmrdevops/spring-boot-mongo'
         }
         */
-          sh "docker login -u tmrdevops -p "Mah0gany1960""
+       
+          sh "docker login -u tmrdevops -p Mah0gany1960"
           sh 'docker push tmrdevops/spring-boot-mongo'
 
      }
