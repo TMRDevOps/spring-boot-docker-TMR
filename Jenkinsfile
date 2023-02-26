@@ -13,7 +13,7 @@ node{
     
     
     stage('Build Docker Image'){
-        sh 'docker build -t tmrdevops/spring-boot-mongo .'
+        sh 'sudo docker build -t tmrdevops/spring-boot-mongo .'
     }
     
     stage('Push Docker Image'){
