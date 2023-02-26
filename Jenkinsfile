@@ -23,13 +23,13 @@ node{
         }
         */
        
-          sh "docker login -u tmrdevops -p dckr_pat_nABztKXysmmx2tObX92MRrDbd7s"
-          sh 'docker push tmrdevops/spring-boot-mongo'
+          sh "sudo docker login -u tmrdevops -p dckr_pat_nABztKXysmmx2tObX92MRrDbd7s"
+          sh 'sudo docker push tmrdevops/spring-boot-mongo'
 
      }
      
     stage('Remove Docker Image'){
-        sh 'docker rmi -f $(docker images -q)'
+        sh 'sudo docker rmi -f $(docker images -q)'
      }
 
 
