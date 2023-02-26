@@ -19,8 +19,9 @@ node{
     stage('Push Docker Image'){
         withCredentials([string(credentialsId: 'dockersecret', variable: 'dockersecret')])  {
           sh "docker login -u tmrdevops -p ${dockersecret}"
+          sh 'docker push tmrdevops/spring-boot-mongo'
         }
-        sh 'docker push tmrdevops/spring-boot-mongo'
+        
      }
      
     stage('Remove Docker Image'){
