@@ -29,7 +29,7 @@ node{
      }
      
     stage('Remove Docker Image'){
-        sh 'sudo docker rmi -f $(docker images -q)'
+        sh 'sudo docker rmi -f $(sudo docker images -q)'
      }
 
 
