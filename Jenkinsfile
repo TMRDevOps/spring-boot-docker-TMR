@@ -32,7 +32,7 @@ node{
         sh 'sudo docker rmi -f $(sudo docker images -q)'
      }
 
-
+/**
      stage("Deploy To Kuberates Cluster"){
        kubernetesDeploy(
          configs: 'springBootMongo.yml', 
@@ -40,11 +40,11 @@ node{
          enableConfigSubstitution: true
         )
      }
-	 
-	  /**
+**/	 
+
       stage("Deploy To Kuberates Cluster"){
         sh 'kubectl apply -f springBootMongo.yml'
-      } **/
+      } 
      
 }
 
