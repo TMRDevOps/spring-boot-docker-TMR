@@ -1,7 +1,7 @@
 node{
      
     stage('SCM Checkout'){
-        git credentialsId: 'GIT_CREDENTIALS', url:  'https://github.com/simonLegah/UnityProject.git',branch: 'master'
+        git credentialsId: 'GIT_CREDENTIALS', url:  'https://github.com/TMRDevOps/spring-boot-docker-TMR.git',branch: 'master'
     }
     
     stage(" Maven Clean Package"){
@@ -13,16 +13,21 @@ node{
     
     
     stage('Build Docker Image'){
-        sh 'docker build -t mylandmarktech/spring-boot-mongo .'
+        sh 'docker build -t tmrdevops/spring-boot-mongo .'
     }
     
     stage('Push Docker Image'){
-        withCredentials([string(credentialsId: 'DOKCER_HUB_PASSWORD', variable: 'DOKCER_HUB_PASSWORD')]) {
-          sh "docker login -u mylandmarktech -p ${DOKCER_HUB_PASSWORD}"
+        withCredentials([string(credentialsId: 'DOKCER_HUB_PASSWORD', variable: 'DOCKER_HUB_PASSWORD')]) {
+          sh "docker login -u tmrdevops -p ${DOKCER_HUB_PASSWORD}"
         }
-        sh 'docker push mylandmarktech/spring-boot-mongo'
+        sh 'docker push tmrdevops/spring-boot-mongo'
      }
      
+    stage('Remove Docker Image'){
+        sh 'docker rmi -f $(docker images -q)'
+     }
+
+
      stage("Deploy To Kuberates Cluster"){
        kubernetesDeploy(
          configs: 'springBootMongo.yml', 
