@@ -1,7 +1,7 @@
 node{
      
     stage('SCM Checkout'){
-        git credentialsId: 'GIT_CREDENTIALS', url:  'https://github.com/TMRDevOps/spring-boot-docker-TMR.git',branch: 'master'
+        git credentialsId: 'Github', url:  'https://github.com/TMRDevOps/spring-boot-docker-TMR.git',branch: 'master'
     }
     
     stage(" Maven Clean Package"){
@@ -17,8 +17,8 @@ node{
     }
     
     stage('Push Docker Image'){
-        withCredentials([string(credentialsId: 'DOKCER_HUB_PASSWORD', variable: 'DOCKER_HUB_PASSWORD')]) {
-          sh "docker login -u tmrdevops -p ${DOKCER_HUB_PASSWORD}"
+        withCredentials([usernamePassword(credentialsId: 'Dockerhub', passwordVariable: 'dockerpass', usernameVariable: 'dockeruser')]) {
+          sh "docker login -u tmrdevops -p ${dockerpass}"
         }
         sh 'docker push tmrdevops/spring-boot-mongo'
      }
