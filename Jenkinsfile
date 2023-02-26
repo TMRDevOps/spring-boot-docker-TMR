@@ -17,8 +17,8 @@ node{
     }
     
     stage('Push Docker Image'){
-        withCredentials([usernamePassword(credentialsId: 'Dockerhub', passwordVariable: 'dockerpass', usernameVariable: 'dockeruser')]) {
-          sh "docker login -u tmrdevops -p ${dockerpass}"
+        withCredentials([string(credentialsId: 'dockersecret', variable: 'dockersecret')])  {
+          sh "docker login -u tmrdevops -p ${dockersecret}"
         }
         sh 'docker push tmrdevops/spring-boot-mongo'
      }
